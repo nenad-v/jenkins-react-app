@@ -12,6 +12,19 @@ pipeline {
         RANDOM_VAR = 'Random variable'
     }
 
+    parameters {
+        choice(
+            name: 'JOB', 
+            choices: ['Test', 'Deploy'], 
+            description: 'Select the job your want to run.'
+        )
+        choice(
+            name: 'STG', 
+            choices: ['stg-1', 'stg-2', 'stg-3'],
+            description: 'Select staging you want to deploy to'
+        )
+    }
+
     stages {
         stage('Install') {
             steps {
@@ -37,9 +50,27 @@ pipeline {
             }
         }
 
-        stage('Random test') {
+        stage('When Test job selected') {
+            when {
+                expression {
+                    params.JOB == 'Test'
+                }
+            }
+
             steps {
-                sh "./scripts/random.sh"
+                echo 'Test job is selected'
+            }
+        }
+
+        stage('When Deploy job selected') {
+            when {
+                expression {
+                    params.JOB == 'Deploy'
+                }
+            }
+
+            steps {
+                echo 'Deploy job is selected'
             }
         }
     }
