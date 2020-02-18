@@ -70,7 +70,7 @@ pipeline {
             }
 
             steps {
-                echo 'Deploy job is selected'
+                sh './scripts/deploy.sh'
             }
         }
     }
