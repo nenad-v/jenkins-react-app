@@ -8,6 +8,8 @@ pipeline {
 
     environment {
         CI = 'true'
+        NODE_ENV = 'production'
+        RANDOM_VAR = 'Random variable'
     }
 
     stages {
@@ -32,6 +34,12 @@ pipeline {
                 failure {
                     echo 'Tests failed'
                 }
+            }
+        }
+
+        stage('Random test') {
+            steps {
+                sh "./scripts/random.sh"
             }
         }
     }
