@@ -58,8 +58,41 @@ pipeline {
                 branch 'development'
             }
 
-            steps {
-                echo 'This job runs only on development branch'
+            input {
+                message "Select one of the following"
+                parameters {
+                    choice(
+                        name: 'TYPE', 
+                        choices: ['foo', 'bar'],
+                        description: 'Select one of the following'
+                    )
+                }
+            }
+
+            stages {
+                stage('Runs only when foo is selected') {
+                    when {
+                        expression {
+                            params.TYPE == 'foo'
+                        }
+                    }
+                    
+                    steps {
+                        echo 'This runs when foo is selected'
+                    }
+                }
+
+                stage('Runs only when bar is selected') {
+                    when {
+                        expression {
+                            params.TYPE == 'bar'
+                        }
+                    }
+
+                    steps {
+                        echo 'This runs when bar is selected'
+                    }
+                }
             }
         }
 
