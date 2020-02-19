@@ -6,6 +6,6 @@ describe('When I render Banner component', () => {
     it('should render correctly', () => {
         const component = shallow(<Banner />);
         expect(component.html()).toMatchSnapshot();
-        expect(component.exists('.Random')).toEqual(true)
+        expect(component.exists('.Banner')).toEqual(true)
     })
 })
