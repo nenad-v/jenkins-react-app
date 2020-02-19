@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'node:10-alpine'
-            args '-p 3000:3000'
         }
     }
 
@@ -47,6 +46,16 @@ pipeline {
                 failure {
                     echo 'Tests failed'
                 }
+            }
+        }
+
+        stage('Only on development') {
+            when {
+                branch 'development'
+            }
+
+            steps {
+                echo 'This job runs only on development branch'
             }
         }
 
