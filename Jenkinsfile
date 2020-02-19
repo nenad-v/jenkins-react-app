@@ -73,10 +73,10 @@ pipeline {
                 stage('Runs only when foo is selected') {
                     when {
                         expression {
-                            params.TYPE == 'foo'
+                            TYPE == 'foo'
                         }
                     }
-                    
+
                     steps {
                         echo 'This runs when foo is selected'
                     }
@@ -85,7 +85,7 @@ pipeline {
                 stage('Runs only when bar is selected') {
                     when {
                         expression {
-                            params.TYPE == 'bar'
+                            TYPE == 'bar'
                         }
                     }
 
